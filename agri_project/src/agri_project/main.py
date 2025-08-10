@@ -10,7 +10,7 @@ def run():
     inputs = {
         "problem_statement": (
             "Beet Cyst Nematode infestation in Sugar Beet seedlings in Lincolnshire, "
-            "April, 15°C, overcast, 75% humidity, 20mm precipitation, severity: "
+            "April, 15°C, overcast, 75% humidity, 20mm precipitation, severity:"
             "1 egg and larvae per gram of soil. Provide a detailed pest management "
             "advice document for this situation."
         ),
