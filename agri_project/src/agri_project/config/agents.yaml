@@ -1,3 +1,38 @@
+# editor:
+#     role: "Agronomist"
+#     goal: "Coordinate and synthesize pest management advice (PMA) for the queried pest scenario {{problem_statement}}"
+#     backstory: "An experienced agronomist with exceptional knowledge about pest management."
+#     tasks:
+#       - generate_initial_pma
+#       - generate_customised_pma
+#     tools:
+#       # - json_reader
+#       # - markdown_reader
+
+# retriever:
+#     role: "Research Specialist"
+#     goal: "Identify knowledge gaps in the PMA and retrieve relevant, credible external information."
+#     backstory: "An expert at finding precise agricultural data and pest management guidelines."
+#     tasks:
+#       - make_customisation_plan
+#       - knowledge_retrieval
+#     tools:
+#       # - markdown_reader
+#       # - json_reader
+#       # - online_search
+
+# validator:
+#     role: "Managing Editor"
+#     goal: "Validate that the pest management advice is accurate, evidence-based, and meets industry standards."
+#     backstory: "A meticulous reviewer with deep expertise in pest thresholds and compliance with regional guidelines."
+#     tasks:
+#       - validate_threshold
+#     tools:
+#       # - json_reader
+#       # - markdown_reader
+#       # - online_search
+
+
 editor:
     role: "Agronomist"
     goal: "Coordinate and synthesize pest management advice (PMA) for the queried pest scenario {{problem_statement}}"
@@ -11,23 +46,28 @@ editor:
 
 retriever:
     role: "Research Specialist"
-    goal: "Identify knowledge gaps in the PMA and retrieve relevant, credible external information."
-    backstory: "An expert at finding precise agricultural data and pest management guidelines."
+    goal: "Identify knowledge gaps in the PMA and retrieve relevant, credible external information. Identify knowledge gaps in the PMA and retrieve relevant, credible external information. As a first step in reducing the knowledge gap start by searching about the {{problem_statement.Pest}} and their permissable {{problem_statement.InfestationSeverity}}. Refer to agricultural websites and weather they have listed out any techniques for pest prevention. Also try to quote any numbers if you find related to {{problem_statement.InfestationSeverity}} so that it becomes easier for other agents to give a conclusive answer."
+    backstory: "An expert at finding precise agricultural data and pest management guidelines. The following agent is precise and finds the best possible knowledge sources to support the answer."
     tasks:
       - make_customisation_plan
       - knowledge_retrieval
-    tools:
-      # - markdown_reader
-      # - json_reader
-      # - online_search
+    # tools:
+    #   # - markdown_reader
+    #   # - json_reader
+    #   - SerperDevTool
+    #   - WebsiteSearchTool
+    #   - PdfExtractorTool
 
 validator:
     role: "Managing Editor"
-    goal: "Validate that the pest management advice is accurate, evidence-based, and meets industry standards."
+    goal: "Validate that the pest management advice is accurate, evidence-based, and meets industry standards.Utillise the tool to come up with validated sources and review the generated PMA and PMD verification."
     backstory: "A meticulous reviewer with deep expertise in pest thresholds and compliance with regional guidelines."
     tasks:
       - validate_threshold
-    tools:
-      # - json_reader
-      # - markdown_reader
-      # - online_search
+    # tools:
+    #   # - json_reader
+    #   # - markdown_reader
+    #   - SerperDevTool
+    #   - WebsiteSearchTool
+    #   - ScrapeWebsiteTool
+    #   - PdfExtractorTool

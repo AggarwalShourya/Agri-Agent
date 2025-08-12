@@ -1,39 +1,75 @@
+# generate_initial_pma:
+#   description: >
+#     Generate comprehensive pest management advice (PMA) for the queried pest scenario
+#     using {{problem_statement}}.
+#   expected_output: >
+#     A complete pest management advice document in markdown format.
+#   agent: editor
+
+# make_customisation_plan:
+#   description: >
+#     Review the initial PMA and identify knowledge gaps in the pest management decision.
+#     Recommend trustworthy sources and search queries to address them.
+#   expected_output: >
+#     A JSON object listing identified gaps, suggested queries, and recommended sources.
+#   agent: retriever
+
+# knowledge_retrieval:
+#   description: >
+#     Retrieve and summarise detailed information from recommended online sources
+#     to fill the knowledge gaps identified in the customisation plan.
+#   expected_output: >
+#     A structured report summarising retrieved information and how it fills each identified gap.
+#   agent: retriever
+
+# generate_customised_pma:
+#   description: >
+#     Integrate retrieved information with the initial PMA to create a customised,
+#     final pest management advice document.
+#   expected_output: >
+#     A final customised pest management advice document in markdown format.
+#   agent: editor
+
+# validate_threshold:
+#   description: >
+#     Verify that the customised PMA's threshold decision aligns with
+#     diagnostic data and authoritative guidelines. Make corrections if necessary.
+#   expected_output: >
+#     A validated PMA with confirmed or corrected pest management decision and supporting rationale.
+#   agent: validator
+
+
 generate_initial_pma:
   description: >
-    Generate comprehensive pest management advice (PMA) for the queried pest scenario
-    using {{problem_statement}}.
+    Generate concise initial PMA for {{problem_statement}}. Structure as Markdown: Scenario Overview, Identification, Monitoring & Thresholds (with PMD), Damage, IPM Strategies, References. Use bullets/tables; <400 words; prioritize UK context.
   expected_output: >
-    A complete pest management advice document in markdown format.
+    Structured Markdown PMA: Brief, evidence-based, with explicit PMD (True/False).
   agent: editor
 
 make_customisation_plan:
   description: >
-    Review the initial PMA and identify knowledge gaps in the pest management decision.
-    Recommend trustworthy sources and search queries to address them.
+    Review initial PMA; identify 2-4 key gaps (e.g., thresholds, sources). Suggest concise queries/sources (e.g., AHDB, Wikipedia, FAO PDF via tools). Limit to essentials; focus UK.
   expected_output: >
-    A JSON object listing identified gaps, suggested queries, and recommended sources.
+    JSON: Gaps array with queries/sources; <200 words total.
   agent: retriever
 
 knowledge_retrieval:
   description: >
-    Retrieve and summarise detailed information from recommended online sources
-    to fill the knowledge gaps identified in the customisation plan.
+    Use tools to fetch/summarize from sources (e.g., Serper for AHDB, PdfExtractor for FAO). Fill gaps crisply; cite briefly.
   expected_output: >
-    A structured report summarising retrieved information and how it fills each identified gap.
+    Structured report: Bullets per gap with summaries/cites; <300 words.
   agent: retriever
 
 generate_customised_pma:
   description: >
-    Integrate retrieved information with the initial PMA to create a customised,
-    final pest management advice document.
+    Integrate retrieved info into initial PMA; keep concise (<500 words). Use bullets/tables; update PMD with sources.
   expected_output: >
-    A final customised pest management advice document in markdown format.
+    Final customised Markdown PMA: Crisp, cited.
   agent: editor
 
 validate_threshold:
   description: >
-    Verify that the customised PMA's threshold decision aligns with
-    diagnostic data and authoritative guidelines. Make corrections if necessary.
+    Verify PMD aligns with data/guidelines (e.g., tools for AHDB/Wikipedia). Correct if needed; use table for rationale. Keep brief; focus on thresholds.
   expected_output: >
-    A validated PMA with confirmed or corrected pest management decision and supporting rationale.
+    Validated PMA: With PMD table, corrections, <200 words rationale.
   agent: validator

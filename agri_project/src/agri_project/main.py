@@ -8,14 +8,20 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 def run():
     """Run the Pest Management Crew with a hardcoded problem statement."""
     inputs = {
-        "problem_statement": (
-            "Beet Cyst Nematode infestation in Sugar Beet seedlings in Lincolnshire, "
-            "April, 15°C, overcast, 75% humidity, 20mm precipitation, severity:"
-            "1 egg and larvae per gram of soil. Provide a detailed pest management "
-            "advice document for this situation."
-        ),
-        "current_year": str(datetime.now().year)
-    }
+    "problem_statement": {
+        "Pest": "Free-Living Nematodes",
+        "InfestationSeverity": "800 Trichodorus nematodes per litre of soil",
+        "CropName": "Sugar Beet",
+        "CropGrowthStage": "Early root development",
+        "Temperature": "12°C",
+        "Weather": "Partly cloudy",
+        "Humidity": "75%",
+        "Precipitation": "30 mm",
+        "Time": "May",
+        "Location": "Norfolk"
+    },
+    "current_year": str(datetime.now().year)
+}
 
     AgriProject().crew().kickoff(inputs=inputs)
 
