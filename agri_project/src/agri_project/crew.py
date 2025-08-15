@@ -8,8 +8,81 @@ from crewai_tools import (
     SerperDevTool,
     WebsiteSearchTool
 )
+from crewai_tools import RagTool
 from embedchain import App  
 from embedchain.config import AppConfig  
+import os
+from crewai.knowledge.source.pdf_knowledge_source import PDFKnowledgeSource
+from crewai.knowledge.storage.knowledge_storage import KnowledgeStorage
+from crewai.knowledge.knowledge import Knowledge
+from crewai_tools import RagTool
+
+
+from crewai import LLM
+
+GEMINI_API_KEY=os.getenv("GEMINI_API_KEY")
+llm = LLM(
+    model="gemini/gemini-2.0-flash-lite",
+    temperature=0.2,
+
+)
+
+# custom_storage = KnowledgeStorage(
+#     embedder={
+#         "provider": "google",
+#         "config": {"model": "models/embedding-001",
+#                    "api_key":""
+#                    }
+#     },
+#     collection_name="my_custom_knowledge"
+# )
+
+pdf_source = PDFKnowledgeSource(
+    file_paths=["cd4890en.pdf"]
+)
+# pdf_source.storage=custom_storage
+
+# my_knowledge = Knowledge(
+#     sources=[pdf_source],
+#     storage=custom_storage,
+#     collection_name="my_custom_knowledge"
+# )
+
+
+
+# Create a RAG tool with custom configuration
+config = {
+    "llm": {
+        "provider": "google",
+        "config": {
+            "model": "gemini/gemini-2.0-flash-lite",
+            "temperature":0.5,
+            "top_p":0.5,
+
+        }
+    },
+    "embedding_model": {
+        "provider": "google",
+        "config": {
+            "model": "models/embedding-001"
+        }
+    },
+    "vectordb": {
+        "provider": "chroma",
+        "config": {
+            "collection_name": "my-collection",
+            "dir":"db"
+        }
+    },
+    "chunker": {
+        "chunk_size": 600,
+        "chunk_overlap": 100,
+        "length_function": "len",
+        "min_chunk_size": 120
+    }
+}
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+pdf_path = os.path.join(BASE_DIR, "knowledge", "cd4890en.pdf")
 
 @CrewBase
 class AgriProject():
@@ -19,7 +92,10 @@ class AgriProject():
     tasks: List[Task]
 
 
-    serper_tool = SerperDevTool(api_key="907fcae3c8a3fb8c61ee6e5833476d0e9138761e")
+    serper_tool = SerperDevTool(api_key=os.getenv('SERPER_API_KEY'))
+    rag_tool = RagTool(config=config, summarize=False)
+    rag_tool.add(source=pdf_path, data_type="pdf_file")
+
     # embedchain_config = {
     #     'embedder': {
     #         'provider': 'google',
@@ -37,16 +113,27 @@ class AgriProject():
         """Agronomist: Generates and customises PMA"""
         return Agent(
             config=self.agents_config['editor'],  # matches agents.yaml key
-            verbose=True
+            verbose=True,
+            llm=llm
         )
 
     @agent
     def retriever(self) -> Agent:
-        """Research Specialist: Finds external data to fill gaps"""
+        """Retrieval Specialist: Finds external data to fill gaps. With the help of two agents provided the following agent specialises in
+        minimising the knowledge gap between a generic answer and a """
         return Agent(
             config=self.agents_config['retriever'],  # matches agents.yaml key
             verbose=True,
-            tools=[self.serper_tool]
+            tools=[self.serper_tool],
+            knowledge_sources=[pdf_source],
+            embedder={
+                   "provider": "google",
+                    "config": {
+                    "model": "models/embedding-001",
+                    "api_key":os.getenv("GEMINI_API_KEY")
+                   }
+            },
+            llm=llm
         )
 
     @agent
@@ -55,7 +142,8 @@ class AgriProject():
         return Agent(
             config=self.agents_config['validator'],  # matches agents.yaml key
             verbose=True,
-            tools=[self.serper_tool]
+            tools=[self.serper_tool],
+            llm=llm
         )
 
     # --- Tasks ---

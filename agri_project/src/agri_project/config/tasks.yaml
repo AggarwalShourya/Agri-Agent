@@ -41,7 +41,7 @@
 
 generate_initial_pma:
   description: >
-    Generate concise initial PMA for {{problem_statement}}. Structure as Markdown: Scenario Overview, Identification, Monitoring & Thresholds (with PMD), Damage, IPM Strategies, References. Use bullets/tables; <400 words; prioritize UK context.
+    Generate concise initial PMA for {{problem_statement}}. Structure as Markdown: Scenario Overview, Identification, Monitoring & Thresholds (with PMD), Damage, IPM Strategies, References. Use bullets/tables; <400 words; prioritize {{problem_statement.location}} context.
   expected_output: >
     Structured Markdown PMA: Brief, evidence-based, with explicit PMD (True/False).
   agent: editor
@@ -55,7 +55,7 @@ make_customisation_plan:
 
 knowledge_retrieval:
   description: >
-    Use tools to fetch/summarize from sources (e.g., Serper for AHDB, PdfExtractor for FAO). Fill gaps crisply; cite briefly.
+    Use tools to fetch/summarize from sources (e.g., Serper for wikipedia and agricultural websites). Fill gaps crisply; cite briefly.
   expected_output: >
     Structured report: Bullets per gap with summaries/cites; <300 words.
   agent: retriever
@@ -69,7 +69,7 @@ generate_customised_pma:
 
 validate_threshold:
   description: >
-    Verify PMD aligns with data/guidelines (e.g., tools for AHDB/Wikipedia). Correct if needed; use table for rationale. Keep brief; focus on thresholds.
+    Verify PMD aligns with data/guidelines. Correct if needed; use table for rationale. Keep brief; focus on thresholds.
   expected_output: >
     Validated PMA: With PMD table, corrections, <200 words rationale.
   agent: validator

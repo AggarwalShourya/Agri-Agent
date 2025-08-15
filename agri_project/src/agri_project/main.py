@@ -9,17 +9,17 @@ def run():
     """Run the Pest Management Crew with a hardcoded problem statement."""
     inputs = {
     "problem_statement": {
-        "Pest": "Free-Living Nematodes",
-        "InfestationSeverity": "800 Trichodorus nematodes per litre of soil",
-        "CropName": "Sugar Beet",
-        "CropGrowthStage": "Early root development",
-        "Temperature": "12°C",
-        "Weather": "Partly cloudy",
-        "Humidity": "75%",
-        "Precipitation": "30 mm",
-        "Time": "May",
-        "Location": "Norfolk"
-    },
+        "pest": "Brown Planthopper (Nilaparvata lugens)",
+        "infestation_severity": "1 hoppers per hill",
+        "crop_name": "Rice",
+        "crop_growth_stage": "Panicle initiation to booting",
+        "temperature": "28°C",
+        "weather": "Overcast with intermittent showers",
+        "humidity": "85%",
+        "precipitation": "50 mm",
+        "time": "August (Kharif season)",
+        "location": "Tamil Nadu (e.g., Cauvery Delta)"
+      },
     "current_year": str(datetime.now().year)
 }
 
