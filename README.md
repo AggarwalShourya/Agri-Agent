@@ -76,7 +76,7 @@ The crew will run the configured agents and produce a `validated_pma.md` in the 
 - Integrate local farmer inputs and imagery (with appropriate privacy safeguards) to improve diagnostics over time. -->
 
 ## Checkout a small working demo below
-[![Watch the video](https://cdn.loom.com/sessions/thumbnails/19014837a2514a67b913e9d02604cf53-with-play.gif)](https://www.loom.com/share/19014837a2514a67b913e9d02604cf53)
+▶️ [Watch Demo on Loom](https://www.loom.com/share/19014837a2514a67b913e9d02604cf53)
 
 
 ## Support & links
