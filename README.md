@@ -56,6 +56,7 @@ SERPER_API_KEY=...
 1. Edit the input example in `agri_project/main.py` to set `crop_name`, `pest`, `infestation_severity`, `location`, etc.
 2. From the `agri_project` folder run:
 ```bash
+cd agri_project
 crewai run
 ```
 The crew will run the configured agents and produce a `validated_pma.md` in the repository root (or in the configured output folder).
