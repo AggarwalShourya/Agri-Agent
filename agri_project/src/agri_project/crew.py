@@ -101,7 +101,7 @@ class AgriProject():
     #         'provider': 'google',
     #         'config': {
     #             'model': 'models/text-embedding-004',  # Gemini embedding model
-    #             'api_key': "AIzaSyAdeQr4U7g0gLjcSZGi0zbcWDhhYvGz42Q"
+    #             'api_key': ""
     #         }
     #     }
     # }
@@ -114,6 +114,14 @@ class AgriProject():
         return Agent(
             config=self.agents_config['editor'],  # matches agents.yaml key
             verbose=True,
+            knowledge_sources=[pdf_source],
+            embedder={
+                   "provider": "google",
+                    "config": {
+                    "model": "models/embedding-001",
+                    "api_key":os.getenv("GEMINI_API_KEY")
+                   }
+            },
             llm=llm
         )
 
@@ -125,14 +133,6 @@ class AgriProject():
             config=self.agents_config['retriever'],  # matches agents.yaml key
             verbose=True,
             tools=[self.serper_tool],
-            knowledge_sources=[pdf_source],
-            embedder={
-                   "provider": "google",
-                    "config": {
-                    "model": "models/embedding-001",
-                    "api_key":os.getenv("GEMINI_API_KEY")
-                   }
-            },
             llm=llm
         )
 
