@@ -48,7 +48,8 @@ generate_initial_pma:
 
 make_customisation_plan:
   description: >
-    Review initial PMA; identify 2-4 key gaps (e.g., thresholds, sources). Suggest concise queries/sources (e.g., AHDB, Wikipedia, FAO PDF via tools). Limit to essentials; focus UK.
+    Review initial PMA; identify 2-4 key gaps (e.g., thresholds, sources). Suggest concise queries/sources (e.g., AHDB, Wikipedia, FAO PDF via tools). Limit to essentials; focus on location specifics like {{problem_statement.location}}.
+  expected_output: >.
   expected_output: >
     JSON: Gaps array with queries/sources; <200 words total.
   agent: retriever
