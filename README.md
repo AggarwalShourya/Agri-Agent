@@ -1,7 +1,7 @@
 
 # AgriPest Agent
 
-Welcome to **AgriPest Agent** — a multi-agent AI example built on top of **crewAI** for generating evidence‑based, localised pest management advice (PMA). This repository demonstrates a three-agent editorial workflow (Editor, Retriever, Validator) that synthesizes, supplements, and validates pest-management recommendations using LLMs and trustworthy external sources.
+Welcome to **AgriPest Agent** — a multi-agent AI system built on top of **crewAI** for generating evidence‑based, localised pest management advice (PMA). This repository demonstrates a three-agent editorial workflow (Editor, Retriever, Validator) that synthesizes, supplements, and validates pest-management recommendations using LLMs and trustworthy external sources.
 
 ## Quick Summary 
 
