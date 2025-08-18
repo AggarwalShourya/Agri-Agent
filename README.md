@@ -75,6 +75,9 @@ The crew will run the configured agents and produce a `validated_pma.md` in the 
 - Add an “auditor” agent that logs decisions and produces a short, verifiable audit trail for each PMA (e.g., list of external sources and the specific facts they supported).
 - Integrate local farmer inputs and imagery (with appropriate privacy safeguards) to improve diagnostics over time. -->
 
+## Checkout a small working demo below
+https://www.loom.com/share/19014837a2514a67b913e9d02604cf53?sid=3d3ff998-6cb6-450c-b203-cfd5efe9311c
+
 ## Support & links
 
 - crewAI docs: https://docs.crewai.com
